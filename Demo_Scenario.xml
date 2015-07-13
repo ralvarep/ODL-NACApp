@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      STUDY OF SOTWARE-DEFINED NETWORKING
+ THROUGH THE DEVELOPMENT OF VIRTUAL SCENARIOS
+      BASED ON THE OPENDAYLIGHT CONTROLLER
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Author: Raúl Álvarez Pinilla
+Tutor: David Fernández Cambronero
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Telematics Engineering Department (DIT)
+Technical University of Madrid (UPM)
+SPAIN
+
+Name:        demo_scenario
+Description: Extended Start Topology
+-->
+
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>demo_scenario</scenario_name>
+    <automac offset="5"/>
+    <vm_mgmt type="none" />
+    <!--vm_mgmt type="private" network="10.250.0.0" mask="24" offset="16">
+       <host_mapping />
+    </vm_mgmt-->     
+    <vm_defaults>
+	    <console id="0" display="no"/>
+	    <console id="1" display="yes"/>
+    </vm_defaults>
+  </global>
+  
+  <net name="Net1" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:01">
+  	<connection name='link1' net='Net2'/>
+	<connection name='link2' net='Net3'/>
+	<connection name='link3' net='Net4'/>
+	<connection name='link4' net='Net5'/>
+  </net>
+  <net name="Net2" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:02">
+  	<connection name='link5' net='Net6'/>
+  	<connection name='link6' net='Net7'/>
+  	<connection name='link7' net='Net8'/>
+  </net>
+  <net name="Net3" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:03">
+  	<connection name='link8'  net='Net9'/>
+  	<connection name='link9'  net='Net10'/>
+  	<connection name='link10' net='Net11'/>
+  </net>
+  <net name="Net4" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:04">
+  	<connection name='link11' net='Net12'/>
+  	<connection name='link12' net='Net13'/>
+  	<connection name='link13' net='Net14'/>
+  </net>
+  <net name="Net5" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:05">
+  	<connection name='link14' net='Net15'/>
+  	<connection name='link15' net='Net16'/>
+  	<connection name='link16' net='Net17'/>
+  </net>
+  <net name="Net6" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:06"/>
+  <net name="Net7" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:07"/>
+  <net name="Net8" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:08"/>
+  <net name="Net9" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:09"/>
+  <net name="Net10" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0a"/>
+  <net name="Net11" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0b"/>
+  <net name="Net12" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0c"/>
+  <net name="Net13" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0d"/>
+  <net name="Net14" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0e"/>
+  <net name="Net15" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:0f"/>
+  <net name="Net16" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:10"/>
+  <net name="Net17" mode="openvswitch" controller="tcp:127.0.0.1:6653" of_version="OpenFlow13" hwaddr="00:00:00:00:00:11"/>
+
+  <vm name="h1" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net6">
+      <ipv4>10.0.0.1/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.4 -c 1</exec>
+  </vm>
+
+  <vm name="h2" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net7">
+      <ipv4>10.0.0.2/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.5 -c 1</exec>
+  </vm>
+
+  <vm name="h3" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net8">
+      <ipv4>10.0.0.3/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.6 -c 1</exec>
+  </vm>
+
+  <vm name="h4" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net9">
+      <ipv4>10.0.0.4/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.7 -c 1</exec>
+  </vm>
+
+  <vm name="h5" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net10">
+      <ipv4>10.0.0.5/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.8 -c 1</exec>
+  </vm>
+
+  <vm name="h6" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net11">
+      <ipv4>10.0.0.6/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.9 -c 1</exec>
+  </vm>
+
+  <vm name="h7" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net12">
+      <ipv4>10.0.0.7/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.10 -c 1</exec>
+  </vm>
+
+  <vm name="h8" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net13">
+      <ipv4>10.0.0.8/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.11 -c 1</exec>
+  </vm>
+
+  <vm name="h9" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net14">
+      <ipv4>10.0.0.9/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.12 -c 1</exec>
+  </vm>
+
+  <vm name="h10" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net15">
+      <ipv4>10.0.0.10/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.1 -c 1</exec>
+  </vm>
+
+  <vm name="h11" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net16">
+      <ipv4>10.0.0.11/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.2 -c 1</exec>
+  </vm>
+
+  <vm name="h12" type="lxc">
+    <filesystem type="cow">/usr/share/vnx/filesystems/rootfs_lxc_ubuntu</filesystem>
+    <if id="1" net="Net17">
+      <ipv4>10.0.0.12/24</ipv4>
+    </if>
+    <exec seq="pingall" type="verbatim" ostype="exec">ping 10.0.0.3 -c 1</exec>
+  </vm>
+  
+</vnx>
